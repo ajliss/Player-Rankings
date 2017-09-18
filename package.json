@@ -1,0 +1,29 @@
+{
+  "name": "player-rankings",
+  "version": "1.0.0",
+  "description": "Rank your players.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "compile": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajliss/Player-Rankings.git"
+  },
+  "author": "ajliss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajliss/Player-Rankings/issues"
+  },
+  "homepage": "https://github.com/ajliss/Player-Rankings#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "webpack": "^3.6.0"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "sequelize": "^4.8.4"
+  }
+}
