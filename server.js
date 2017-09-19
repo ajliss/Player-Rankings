@@ -17,23 +17,23 @@ server.get('/players', (req, res) => {
 server.get('/averages', (req, res) => {
   db.avgs.findAll()
   .then((results) => {
-  res.status(200).send('hustling and bustling')
+  res.status(200).send(results)
   })
 });
 
 server.post('/players', (req, res) => {
-  db.players.create({
+  db.players.findOrCreate({where: {
     name: req.body.name,
     age: req.body.age,
     position: req.body.position
-    })
+    }})
   .then(
     res.status(201).send('Spinning and winning')
     )
 })
 
 server.post('/averages', (req, res) => {
-
+  db.players
 
 
   res.status(201).send('posting and toasting');
