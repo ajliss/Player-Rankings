@@ -15,7 +15,10 @@ server.get('/players', (req, res) => {
 });
 
 server.get('/averages', (req, res) => {
-  res.status(200).send(data)
+  db.avgs.findAll()
+  .then((results) => {
+  res.status(200).send('hustling and bustling')
+  })
 });
 
 server.post('/players', (req, res) => {
@@ -30,7 +33,9 @@ server.post('/players', (req, res) => {
 })
 
 server.post('/averages', (req, res) => {
-  // create average instance and put it into db
+
+
+
   res.status(201).send('posting and toasting');
 })
 
