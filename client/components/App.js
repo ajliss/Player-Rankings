@@ -14,6 +14,9 @@ class App extends React.Component {
       averages: [],
       showForm: false
     }
+    this.toggleForm = this.toggleForm.bind(this);
+    this.showAvgs = this.showAvgs.bind(this);
+    this.showPlayers = this.showPlayers.bind(this)
   }
 
   componentDidMount() {
@@ -42,17 +45,28 @@ class App extends React.Component {
     this.setState({showForm: true})
   }
 
+  postBio(name, age, position) {
+    console.log('toasted')
+    if (name !== '') {
+      axios.post('/players', name, age, position).then(response => {
+        console.log(response);
+      })
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div id="home">
         <div>
           <NavBar 
-            showPlayers={this.showPlayers.bind(this)} 
-            showAvgs={this.showAvgs.bind(this)}
-            toggle={this.toggleForm.bind(this)}
+            showPlayers={this.showPlayers} 
+            showAvgs={this.showAvgs}
+            toggle={this.toggleForm}
           />
         </div>
-        { this.state.showForm ? <Input /> : <PlayersList players={this.state.players}/> }
+          { this.state.showForm ? 
+          <Input postBio={this.postBio.bind(this)}/> : 
+          <PlayersList players={this.state.players}/> }
       </div>
     )
   }
