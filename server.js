@@ -1,39 +1,37 @@
 const express = require('express');
-const parser = require('body-parser')
-const db = require('./database')
+const parser = require('body-parser');
+const path = require('path');
+const db = require('./database');
 
 const server = express();
-
-server.get('/', (req, res) => {
-  res.send('Got \'em');
-});
+server.use(parser.json());
+server.use(express.static('./public'))
 
 server.get('/players', (req, res) => {
-  if (req.body.name) {
-    // get player by name
-  } else {
-    // get all players
-  }
-  res.status(200).send(data)
+  db.players.findAll()
+  .then((results) => {
+  res.status(200).send(results)
+  })
 });
 
 server.get('/averages', (req, res) => {
-  if (req.body.name) {
-    // get player and averages by name
-  } else {
-    // get all players and averages
-  }
   res.status(200).send(data)
 });
 
 server.post('/players', (req, res) => {
-  // create player instance and put it into db
-  res.status(201).send('posted and toasted');
+  db.players.create({
+    name: req.body.name,
+    age: req.body.age,
+    position: req.body.position
+    })
+  .then(
+    res.status(201).send('Spinning and winning')
+    )
 })
 
 server.post('/averages', (req, res) => {
   // create average instance and put it into db
-  res.status(201).send('posted and toasted');
+  res.status(201).send('posting and toasting');
 })
 
 

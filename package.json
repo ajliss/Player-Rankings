@@ -18,16 +18,21 @@
     "url": "https://github.com/ajliss/Player-Rankings/issues"
   },
   "homepage": "https://github.com/ajliss/Player-Rankings#readme",
-  "devDependencies": {
-    "nodemon": "^1.12.1",
-    "webpack": "^3.6.0"
-  },
   "dependencies": {
+    "babel": "^6.23.0",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "sequelize": "^4.8.4",
-    "sqlite3": "^3.1.11"
+    "sqlite3": "^3.1.11",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.12.1"
   }
 }

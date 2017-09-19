@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('Basketball', 'root', '', {
-  host: '127.0.0.1:8000',
+const sequelize = new Sequelize('bball', 'root', '', {
   dialect: 'sqlite',
   storage: './bball.sqlite'
 });
