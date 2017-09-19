@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ajliss/Player-Rankings#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel": "^6.23.0",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",

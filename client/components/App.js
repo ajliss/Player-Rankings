@@ -1,14 +1,26 @@
 import React from 'react';
 import PlayersList from './PlayersList';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      players: ['Houston']
+      players: []
     }
   }
 
+  componentDidMount() {
+    this.getPlayers().then(response => {
+      this.setState({
+        players: response.data
+      })
+    });
+  }
+
+  getPlayers() {
+    return axios.get('/players');
+  }
 
   render() {
     return (
