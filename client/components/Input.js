@@ -11,6 +11,7 @@ class Input extends React.Component {
     }
     this.changeName = this.changeName.bind(this);
     this.changeAge = this.changeAge.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.changePosition = this.changePosition.bind(this);
   }
 
@@ -20,11 +21,16 @@ class Input extends React.Component {
   }
   
   changeAge(event) {
-    this.setState({position: event.target.value});
+    this.setState({age: parseInt(event.target.value)});
   }
 
   changePosition(event) {
     this.setState({position: event.target.value});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.postBio(this.state.name, this.state.age, this.state.position);
   }
 
   render() {
@@ -49,7 +55,7 @@ class Input extends React.Component {
             <FormControl type="text" placeholder="SG" onChange={this.changePosition}/>
           </FormGroup>
           {' '}
-          <Button type="submit" onSubmit={this.props.postBio(this.state.name, this.state.age, this.state.position)}>
+          <Button type="button" onClick={this.handleSubmit}>
             Submit
           </Button>
         </Form>

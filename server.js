@@ -22,14 +22,18 @@ server.get('/averages', (req, res) => {
 });
 
 server.post('/players', (req, res) => {
-  db.players.findOrCreate({where: {
-    name: req.body.name,
-    age: req.body.age,
-    position: req.body.position
-    }})
-  .then(
-    res.status(201).send('Spinning and winning')
-    )
+  if (req.body.name !== '') {
+    db.players.findOrCreate({where: {
+      name: req.body.name,
+      age: req.body.age,
+      position: req.body.position
+      }})
+    .then(
+      res.status(201).send('Spinning and winning')
+      )
+  } else {
+    res.status(304).send('Failed to post, no name received.');
+  }
 })
 
 server.post('/averages', (req, res) => {

@@ -46,12 +46,10 @@ class App extends React.Component {
   }
 
   postBio(name, age, position) {
-    console.log('toasted')
-    if (name !== '') {
-      axios.post('/players', name, age, position).then(response => {
+    console.log('posted and toasted ', name, age, position)
+      axios.post('/players', {name: name, age: age, position: position}).then(response => {
         console.log(response);
       })
-    }
   }
 
   render() {
