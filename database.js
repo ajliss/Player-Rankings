@@ -21,19 +21,18 @@ const Averages = sequelize.define('avgs', {
   ppg: {
     type: Sequelize.DOUBLE
   },
-  rpb: {
-    type: Sequelize.DOUBLE
-  },
   apg: {
     type: Sequelize.DOUBLE
   },
-
+  rpg: {
+    type: Sequelize.DOUBLE
+  }
 });
 
 Averages.belongsTo(Players);
 
-Players.sync();
-Averages.sync();
+sequelize.sync();
+
 
 module.exports.players = Players;
 module.exports.avgs = Averages;

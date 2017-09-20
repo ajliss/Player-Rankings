@@ -37,10 +37,23 @@ server.post('/players', (req, res) => {
 })
 
 server.post('/averages', (req, res) => {
-  db.players
-
-
+  db.players.findOrCreate({
+    where: {
+      name: req.body.name 
+    }
+  })
+  .spread((data, created) => {
+    console.log(data.dataValues.id);
+    db.avgs.findOrCreate( {where: { 
+        ppg: req.body.ppg,
+        apg: req.body.apg,
+        rpg: req.body.rpg,
+        playerId: data.dataValues.id
+    }})
+  })
+  .then(() => {
   res.status(201).send('posting and toasting');
+  })
 })
 
 
