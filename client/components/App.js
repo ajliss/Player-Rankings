@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PlayersList from './PlayersList';
 import Input from './Input';
 import NavBar from './NavBar';
-import Player from './Player'
+import StatsInput from './StatsInput'
 
 class App extends React.Component {
   constructor() {
@@ -12,11 +12,15 @@ class App extends React.Component {
     this.state = {
       players: [],
       averages: [],
-      showForm: false
+      showBioInput: false, 
+      showStatsInput:false
     }
-    this.toggleForm = this.toggleForm.bind(this);
+    this.toggleBio = this.toggleBio.bind(this);
     this.showAvgs = this.showAvgs.bind(this);
-    this.showPlayers = this.showPlayers.bind(this)
+    this.showPlayers = this.showPlayers.bind(this);
+    this.toggleStatsForm = this.toggleStatsForm.bind(this);
+    this.postStats = this.postStats.bind(this);
+    this.postBio = this.postBio.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +31,8 @@ class App extends React.Component {
     axios.get('/players').then(response => {
       this.setState({
         players: response.data,
-        showForm: false
+        showBioInput: false,
+        showStatsInput: false
       })
     });
   }
@@ -36,18 +41,31 @@ class App extends React.Component {
     console.log('avgs')
     axios.get('/averages').then(response => {
       this.setState({
-        avgs: response.data
+        avgs: response.data,
+        showBioInput: false, 
+        showStatsInput: false
       })
     });
   } 
 
-  toggleForm() {
-    this.setState({showForm: true})
+  toggleBio() {
+    this.setState({showBioInput: true, showStatsInput: false})
+  }
+
+  toggleStatsForm() {
+    this.setState({showBioInput: false, showStatsInput: true})
   }
 
   postBio(name, age, position) {
     console.log('posted and toasted ', name, age, position)
       axios.post('/players', {name: name, age: age, position: position}).then(response => {
+        console.log(response);
+      })
+  }
+
+  postStats(name, ppg, apg, rpg) {
+    console.log('posted and toasted ', name, ppg, apg, rpg)
+      axios.post('/averages', {name: name, ppg: ppg, apg: apg, rpg: rpg}).then(response => {
         console.log(response);
       })
   }
@@ -59,30 +77,17 @@ class App extends React.Component {
           <NavBar 
             showPlayers={this.showPlayers} 
             showAvgs={this.showAvgs}
-            toggle={this.toggleForm}
+            toggleBio={this.toggleBio}
+            toggleStatsForm={this.toggleStatsForm}
           />
         </div>
-          { this.state.showForm ? 
-          <Input postBio={this.postBio.bind(this)}/> : 
-          <PlayersList players={this.state.players}/> }
+          { this.state.showStatsInput ? 
+          <StatsInput postStats={this.postStats}/> :
+          (this.state.showBioInput ? 
+          <Input postBio={this.postBio}/> : 
+          <PlayersList players={this.state.players}/>) }
       </div>
     )
   }
 }
 export default App;
-
-  // render() {
-  //   return (
-  //     <Router>
-  //       <div>
-  //         <ul>
-  //           <li><Link to="/players">Players</Link></li>
-  //         </ul>
-
-  //         <hr/>
-
-  //         <Route path="/players" component={PlayersList}/>
-  //       </div>
-  //     </Router>
-  //   )
-  // }
